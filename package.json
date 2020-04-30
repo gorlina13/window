@@ -40,5 +40,9 @@
     "source/*.html",
     "source/js/**/*.js",
     "source/assets/**/*.{css,less,scss,js,php}"
-  ]
+  ],
+  "dependencies": {
+    "jquery": "^3.5.0",
+    "slick-carousel": "^1.8.1"
+  }
 }
