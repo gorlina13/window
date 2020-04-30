@@ -38,8 +38,7 @@
     "*.json",
     "*.js",
     "source/*.html",
-    "source/js/**/*.js",
-    "source/assets/**/*.{css,less,scss,js,php}"
+    "source/js/**/*.js"
   ],
   "dependencies": {
     "jquery": "^3.5.0",
