@@ -27,9 +27,9 @@ const devWebpackOptions = {
           loader: "babel-loader",
           options: {
             presets: [["@babel/preset-env", {
-                debug: true,
-                corejs: 3,
-                useBuiltIns: "usage"
+              debug: true,
+              corejs: 3,
+              useBuiltIns: "usage"
             }]]
           }
         }
@@ -52,8 +52,8 @@ const prodWebpackOptions = {
           loader: "babel-loader",
           options: {
             presets: [["@babel/preset-env", {
-                corejs: 3,
-                useBuiltIns: "usage"
+              corejs: 3,
+              useBuiltIns: "usage"
             }]]
           }
         }
