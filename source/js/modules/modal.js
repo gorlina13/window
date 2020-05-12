@@ -1,7 +1,6 @@
+import {checkTab, checkEsc, checkSpaceBar} from './util';
+
 const modal = () => {
-  const ESC_KEYCODE = 27;
-  const TAB_KEYCODE = 9;
-  const SPACE_KEYCODE = 32;
   const elems = document.querySelectorAll(`[data-modal]`);
   const scrollBarWidth = calcScrollBarWidth();
   let shownModal;
@@ -37,21 +36,6 @@ const modal = () => {
     elems.forEach((item) => {
       item.style.display = `none`;
     });
-  }
-
-  function checkTab(evt) {
-    const key = evt.key || evt.keyCode;
-    return key === `Tab` || key === TAB_KEYCODE;
-  }
-
-  function checkEsc(evt) {
-    const key = evt.key || evt.keyCode;
-    return key === `Escape` || key === `Esc` || key === ESC_KEYCODE;
-  }
-
-  function checkSpaceBar(evt) {
-    const key = evt.key || evt.keyCode;
-    return key === ` ` || key === `Spacebar` || key === SPACE_KEYCODE;
   }
 
   function showModal(modalElem) {
