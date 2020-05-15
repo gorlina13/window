@@ -40,4 +40,19 @@ function checkArrowLeft(evt) {
   return key === `ArrowLeft` || key === ARROW_LEFT_KEYCODE;
 }
 
-export {checkTab, checkEsc, checkSpaceBar, checkEnter, checkArrowRight, checkArrowLeft};
+function checkArrowDown(evt) {
+  const ARROW_DOWN_KEYCODE = 40;
+  const key = evt.key || evt.keyCode;
+
+  return key === `ArrowDown ` || key === ARROW_DOWN_KEYCODE;
+}
+
+export {
+  checkTab,
+  checkEsc,
+  checkSpaceBar,
+  checkEnter,
+  checkArrowRight,
+  checkArrowLeft,
+  checkArrowDown
+};
