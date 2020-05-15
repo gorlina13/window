@@ -2,8 +2,12 @@ import 'element-closest-polyfill';
 import './slider';
 import modal from './modules/modal';
 import tabbed from './modules/tabbed';
+import changeModalState from './modules/changeModalState';
 
 function work() {
+  const modalState = {};
+
+  changeModalState(modalState);
   modal();
   tabbed({
     selectors: [`.glazing_slider`, `.glazing_block`, `.glazing_content`],
