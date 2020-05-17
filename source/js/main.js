@@ -3,9 +3,11 @@ import './slider';
 import modal from './modules/modal';
 import tabbed from './modules/tabbed';
 import changeModalState from './modules/changeModalState';
+import timer from './modules/timer';
 
 function work() {
   const modalState = {};
+  const deadline = `2020-06-01`;
 
   changeModalState(modalState);
   modal();
@@ -25,6 +27,7 @@ function work() {
     nameSpace: `balcon`,
     display: `inline-block`
   });
+  timer(`.container1`, deadline);
 }
 
 if (document.readyState === `loading`) {
