@@ -3,6 +3,7 @@ import './slider';
 import modal from './modules/modal';
 import tabbed from './modules/tabbed';
 import changeModalState from './modules/changeModalState';
+import forms from './modules/forms';
 import timer from './modules/timer';
 
 function work() {
@@ -27,6 +28,7 @@ function work() {
     nameSpace: `balcon`,
     display: `inline-block`
   });
+  forms(modalState);
   timer(`.container1`, deadline);
 }
 
