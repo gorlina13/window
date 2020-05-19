@@ -13,7 +13,7 @@ const changeModalState = (state) => {
 
   function onBalconListKeydown(prop, evt) {
     if (checkSpaceBar(evt) || checkEnter(evt)) {
-      chooseBalcon(evt, prop);
+      chooseBalcon(prop, evt);
     }
   }
 
