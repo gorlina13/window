@@ -1,4 +1,4 @@
-import {checkSpaceBar, checkEnter, checkArrowRight, checkArrowLeft} from './util';
+import {checkSpaceBar, checkEnter, checkArrowRight, checkArrowLeft, checkArrowDown} from './util';
 
 const tabbed = ({selectors: [tabListSelector, tabSelector, tabPanelSelector],
   activeClass,
@@ -8,8 +8,9 @@ const tabbed = ({selectors: [tabListSelector, tabSelector, tabPanelSelector],
   const tabList = document.querySelector(tabListSelector);
   const tabs = document.querySelectorAll(tabSelector);
   const panels = document.querySelectorAll(tabPanelSelector);
-  const handleTabListKeydownLikeClick = onTabListClick;
+  const actAsIfTabListIsClicked = onTabListClick;
   let tabFocus = 0;
+  let selectedTab = 0;
 
   setup();
 
@@ -42,6 +43,7 @@ const tabbed = ({selectors: [tabListSelector, tabSelector, tabPanelSelector],
     });
     tabs[i].setAttribute(`aria-selected`, true);
     tabs[i].classList.add(activeClass);
+    selectedTab = i;
 
     panels.forEach((panel) => {
       panel.style.display = `none`;
@@ -84,8 +86,13 @@ const tabbed = ({selectors: [tabListSelector, tabSelector, tabPanelSelector],
       manageTabFocus(evt);
     }
 
+    if (checkArrowDown(evt)) {
+      evt.preventDefault();
+      panels[selectedTab].focus();
+    }
+
     if (checkSpaceBar(evt) || checkEnter(evt)) {
-      handleTabListKeydownLikeClick(evt);
+      actAsIfTabListIsClicked(evt);
     }
   }
 };
