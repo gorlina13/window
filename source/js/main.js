@@ -5,6 +5,7 @@ import tabbed from './modules/tabbed';
 import changeModalState from './modules/changeModalState';
 import forms from './modules/forms';
 import timer from './modules/timer';
+import images from './modules/images';
 
 function work() {
   const modalState = {};
@@ -30,6 +31,7 @@ function work() {
   });
   forms(modalState);
   timer(`.container1`, deadline);
+  images();
 }
 
 if (document.readyState === `loading`) {
