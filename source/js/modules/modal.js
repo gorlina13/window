@@ -1,4 +1,4 @@
-import {checkTab, checkEsc, checkSpaceBar} from './util';
+import {checkKey} from './util';
 
 const modal = () => {
   const elems = document.querySelectorAll(`[data-modal]`);
@@ -94,7 +94,7 @@ const modal = () => {
     }
 
     function onTriggerKeydown(evt) {
-      if (checkSpaceBar(evt)) {
+      if (checkKey(evt, ` `)) {
         evt.preventDefault();
         openDialog();
       }
@@ -120,7 +120,7 @@ const modal = () => {
     }
 
     function onWindowKeydown(evt) {
-      if (checkTab(evt)) {
+      if (checkKey(evt, `Tab`)) {
         // If Shift + Tab
         if (evt.shiftKey) {
           if (document.activeElement === modalElem.firstTabStop) {
@@ -136,8 +136,7 @@ const modal = () => {
         }
       }
 
-      // if Esc
-      if (checkEsc(evt)) {
+      if (checkKey(evt, `Escape`)) {
         if (shownModal) {
           evt.preventDefault();
           closeDialog();

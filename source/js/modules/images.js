@@ -1,4 +1,4 @@
-import {checkTab, checkEsc, checkSpaceBar} from './util';
+import {checkKey} from './util';
 
 const images = () => {
   const workSection = document.querySelector(`.works`);
@@ -7,30 +7,37 @@ const images = () => {
   const lastTabStop = previews[previews.length - 1].parentElement;
   const imgPopup = document.createElement(`div`);
   const imgWrapper = document.createElement(`div`);
-  const bigImage = document.createElement(`img`);
+  const bigImg = document.createElement(`img`);
 
-  previews.forEach((img) => {
-    img.parentElement.setAttribute(`role`, `button`);
-  });
+  function setup() {
+    previews.forEach((img) => {
+      img.parentElement.setAttribute(`role`, `button`);
+    });
 
-  imgPopup.classList.add(`popup`);
-  imgPopup.style.justifyContent = `center`;
-  imgPopup.style.alignItems = `center`;
-  imgWrapper.style.flex = `0 1 85%`;
-  imgWrapper.style.minWidth = `0%`;
-  bigImage.style.display = `block`;
-  bigImage.style.maxWidth = `100%`;
-  bigImage.style.marginLeft = `auto`;
-  bigImage.style.marginRight = `auto`;
-  hideImage();
+    imgPopup.classList.add(`popup`);
+    stylePopupElems();
+    hidePopup();
 
-  imgWrapper.appendChild(bigImage);
-  imgPopup.appendChild(imgWrapper);
-  workSection.appendChild(imgPopup);
+    imgWrapper.appendChild(bigImg);
+    imgPopup.appendChild(imgWrapper);
+    workSection.appendChild(imgPopup);
 
-  workSection.addEventListener(`click`, onworkSectionClick);
-  workSection.addEventListener(`keydown`, onWorkSectionKeydown);
-  window.addEventListener(`keydown`, onWindowKeydown);
+    workSection.addEventListener(`click`, onworkSectionClick);
+    workSection.addEventListener(`keydown`, onWorkSectionKeydown);
+    window.addEventListener(`keydown`, onWindowKeydown);
+  }
+
+
+  function stylePopupElems() {
+    imgPopup.style.justifyContent = `center`;
+    imgPopup.style.alignItems = `center`;
+    imgWrapper.style.flex = `0 1 85%`;
+    imgWrapper.style.minWidth = `0%`;
+    bigImg.style.display = `block`;
+    bigImg.style.maxWidth = `100%`;
+    bigImg.style.marginLeft = `auto`;
+    bigImg.style.marginRight = `auto`;
+  }
 
   function onworkSectionClick(evt) {
     const preview = evt.target.classList.contains(`preview`) ||
@@ -40,59 +47,60 @@ const images = () => {
 
     if (preview) {
       evt.preventDefault();
-      showImage(evt);
+      showPopup(evt);
     }
 
     if (popup) {
-      hideImage();
+      hidePopup();
     }
   }
 
   function onWindowKeydown(evt) {
-    // if Esc
-    if (checkEsc(evt)) {
+    if (checkKey(evt, `Escape`)) {
       if (imgPopup.style.display === `flex`) {
         evt.preventDefault();
-        hideImage();
+        hidePopup();
       }
     }
   }
 
   function onWorkSectionKeydown(evt) {
-    if (checkTab(evt)) {
+    if (checkKey(evt, `Tab`)) {
       // If Shift + Tab
       if (evt.shiftKey) {
         if (document.activeElement === firstTabStop) {
-          hideImage();
+          hidePopup();
         }
       // if Tab
       } else {
         if (document.activeElement === lastTabStop) {
-          hideImage();
+          hidePopup();
         }
       }
     }
 
-    if (checkSpaceBar(evt)) {
+    if (checkKey(evt, ` `)) {
       if (evt.target.children[0].classList.contains(`preview`)) {
         evt.preventDefault();
-        showImage(evt);
+        showPopup(evt);
       }
     }
   }
 
-  function showImage(evt) {
+  function showPopup(evt) {
     imgPopup.style.display = `flex`;
 
     const path = evt.target.parentElement.getAttribute(`href`) ||
     evt.target.getAttribute(`href`);
 
-    bigImage.setAttribute(`src`, path);
+    bigImg.setAttribute(`src`, path);
   }
 
-  function hideImage() {
+  function hidePopup() {
     imgPopup.style.display = `none`;
   }
+
+  setup();
 };
 
 export default images;

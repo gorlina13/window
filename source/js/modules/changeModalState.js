@@ -1,4 +1,4 @@
-import {checkSpaceBar, checkEnter} from './util';
+import {checkKey} from './util';
 import checkNumInput from './checkNumInput';
 
 const changeModalState = (state) => {
@@ -12,7 +12,7 @@ const changeModalState = (state) => {
   const onBalconListClick = chooseBalcon;
 
   function onBalconListKeydown(prop, evt) {
-    if (checkSpaceBar(evt) || checkEnter(evt)) {
+    if (checkKey(evt, ` `) || checkKey(evt, `Enter`)) {
       chooseBalcon(prop, evt);
     }
   }

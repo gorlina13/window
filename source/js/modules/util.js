@@ -1,58 +1,46 @@
-function checkTab(evt) {
+const checkKey = (evt, keyString) => {
   const TAB_KEYCODE = 9;
-  const key = evt.key || evt.keyCode;
-
-  return key === `Tab` || key === TAB_KEYCODE;
-}
-
-function checkEsc(evt) {
   const ESC_KEYCODE = 27;
-  const key = evt.key || evt.keyCode;
-
-  return key === `Escape` || key === `Esc` || key === ESC_KEYCODE;
-}
-
-function checkSpaceBar(evt) {
   const SPACE_KEYCODE = 32;
-  const key = evt.key || evt.keyCode;
-
-  return key === ` ` || key === `Spacebar` || key === SPACE_KEYCODE;
-}
-
-function checkEnter(evt) {
   const ENTER_KEYCODE = 13;
-  const key = evt.key || evt.keyCode;
-
-  return key === `Enter` || key === ENTER_KEYCODE;
-}
-
-function checkArrowRight(evt) {
   const ARROW_RIGHT_KEYCODE = 39;
-  const key = evt.key || evt.keyCode;
-
-  return key === `ArrowRight` || key === `Right` || key === ARROW_RIGHT_KEYCODE;
-}
-
-function checkArrowLeft(evt) {
   const ARROW_LEFT_KEYCODE = 37;
-  const key = evt.key || evt.keyCode;
-
-  return key === `ArrowLeft` || key === `Left` || key === ARROW_LEFT_KEYCODE;
-}
-
-function checkArrowDown(evt) {
   const ARROW_DOWN_KEYCODE = 40;
+
   const key = evt.key || evt.keyCode;
+  let check;
 
-  return key === `ArrowDown` || key === `Down` || key === ARROW_DOWN_KEYCODE;
-}
+  switch (keyString) {
+    case `Tab`:
+      check = key === keyString || key === TAB_KEYCODE;
+      break;
 
-export {
-  checkTab,
-  checkEsc,
-  checkSpaceBar,
-  checkEnter,
-  checkArrowRight,
-  checkArrowLeft,
-  checkArrowDown
+    case `Escape`:
+      check = key === keyString || key === `Esc` || key === ESC_KEYCODE;
+      break;
+
+    case ` `:
+      check = key === keyString || key === `Spacebar` || key === SPACE_KEYCODE;
+      break;
+
+    case `Enter`:
+      check = key === keyString || key === ENTER_KEYCODE;
+      break;
+
+    case `ArrowRight`:
+      check = key === keyString || key === `Right` || key === ARROW_RIGHT_KEYCODE;
+      break;
+
+    case `ArrowLeft`:
+      check = key === keyString || key === `Left` || key === ARROW_LEFT_KEYCODE;
+      break;
+
+    case `ArrowDown`:
+      check = key === keyString || key === `Down` || key === ARROW_DOWN_KEYCODE;
+      break;
+  }
+
+  return check;
 };
+
+export {checkKey};

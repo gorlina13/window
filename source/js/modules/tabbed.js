@@ -1,4 +1,4 @@
-import {checkSpaceBar, checkEnter, checkArrowRight, checkArrowLeft, checkArrowDown} from './util';
+import {checkKey} from './util';
 
 const tabbed = ({selectors: [tabListSelector, tabSelector, tabPanelSelector],
   activeClass,
@@ -11,8 +11,6 @@ const tabbed = ({selectors: [tabListSelector, tabSelector, tabPanelSelector],
   const actAsIfTabListIsClicked = onTabListClick;
   let tabFocus = 0;
   let selectedTab = 0;
-
-  setup();
 
   function setup() {
     tabList.setAttribute(`role`, `tablist`);
@@ -53,13 +51,13 @@ const tabbed = ({selectors: [tabListSelector, tabSelector, tabPanelSelector],
 
   function manageTabFocus(evt) {
     tabs[tabFocus].setAttribute(`tabindex`, -1);
-    if (checkArrowRight(evt)) {
+    if (checkKey(evt, `ArrowRight`)) {
       tabFocus++;
       // If we're at the end, go to the start
       if (tabFocus >= tabs.length) {
         tabFocus = 0;
       }
-    } else if (checkArrowLeft(evt)) {
+    } else if (checkKey(evt, `ArrowLeft`)) {
       tabFocus--;
       // If we're at the start, move to the end
       if (tabFocus < 0) {
@@ -82,19 +80,21 @@ const tabbed = ({selectors: [tabListSelector, tabSelector, tabPanelSelector],
   }
 
   function onTabListKeydown(evt) {
-    if (checkArrowRight(evt) || checkArrowLeft(evt)) {
+    if (checkKey(evt, `ArrowRight`) || checkKey(evt, `ArrowLeft`)) {
       manageTabFocus(evt);
     }
 
-    if (checkArrowDown(evt)) {
+    if (checkKey(evt, `ArrowDown`)) {
       evt.preventDefault();
       panels[selectedTab].focus();
     }
 
-    if (checkSpaceBar(evt) || checkEnter(evt)) {
+    if (checkKey(evt, ` `) || checkKey(evt, `Enter`)) {
       actAsIfTabListIsClicked(evt);
     }
   }
+
+  setup();
 };
 
 export default tabbed;
