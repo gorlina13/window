@@ -10,6 +10,7 @@ const gulpIf = require("gulp-if");
 const webpack = require("webpack-stream");
 
 const isDevelopment = !process.env.NODE_ENV || process.env.NODE_ENV == "development";
+const dist = "dist";
 
 const devWebpackOptions = {
   mode: "development",
@@ -71,31 +72,31 @@ function style() {
   })
     .pipe(plumber())
     .pipe(csso())
-    .pipe(gulp.dest("dist"))
+    .pipe(gulp.dest(dist))
     .pipe(server.stream());
 }
 
 function clean() {
-  return del("dist");
+  return del(dist);
 }
 
 function assets() {
   return gulp.src("source/assets/**", {
     base: "source"
   })
-    .pipe(gulp.dest("dist"));
+    .pipe(gulp.dest(dist));
 }
 
 function html() {
   return gulp.src("source/*.html")
     .pipe(htmlmin({ collapseWhitespace: true }))
-    .pipe(gulp.dest("dist"));
+    .pipe(gulp.dest(dist));
 }
 
 function js() {
   return gulp.src("source/js/main.js")
     .pipe(gulpIf(isDevelopment, webpack(devWebpackOptions), webpack(prodWebpackOptions)))
-    .pipe(gulp.dest("dist/js"));
+    .pipe(gulp.dest(dist + "/js"));
 }
 
 function serve(done) {
