@@ -74,6 +74,7 @@ const modal = () => {
     close.setAttribute(`aria-label`, `Закрыть окно`);
 
     triggers.forEach((item) => {
+      item.setAttribute(`aria-haspopup`, `dialog`);
       item.addEventListener(`click`, onTriggerClick);
 
       if (item.tagName === `A`) {
@@ -82,6 +83,7 @@ const modal = () => {
       }
     });
 
+    modalElem.setAttribute(`role`, `dialog`);
     modalElem.addEventListener(`click`, onModalClick);
 
     if (time !== null && showByTime) {
