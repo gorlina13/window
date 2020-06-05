@@ -1,4 +1,5 @@
 import checkNumInput from './checkNumInput';
+import 'whatwg-fetch';
 
 const forms = (state) => {
   const windowForms = document.querySelectorAll(`form`);
